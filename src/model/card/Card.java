@@ -1,31 +1,22 @@
 package model.card;
 
 public class Card {
-	private char colour;
-	private int value;
-	private String label;
+	private Colour colour;
+	private Value value;
 
-	public char getColour() {
+	public Colour getColour() {
 		return colour;
 	}
 
-	public void setColour(char colour) {
+	public void setColour(Colour colour) {
 		this.colour = colour;
 	}
 
-	public int getValue(Card card) {
+	public Value getValue(Card card) {
 		return value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(Value value) {
 		this.value = value;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
 	}
 }

@@ -1,22 +1,29 @@
 package app;
 
-import handler.CardHandler;
-import model.Const;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.card.Card;
+import model.card.Colour;
+import model.card.Value;
 
 public class Start {
 	public static void main(String[] args) {
 		System.out.println("Štart hry...");
 		Player player = new Player();
 		Player computer = new Player();
-		player.setCards(CardFactory.getInstance().createCard(Const.DIAMONDS, Const.EIGHT));
-		computer.setCards(CardFactory.getInstance().createCard(Const.HEARTS, Const.KING));
-		player.setCards(CardFactory.getInstance().createCard(Const.CLUBS, Const.TEN));
-		computer.setCards(CardFactory.getInstance().createCard(Const.SPADES, Const.JACK));
-		player.setCards(CardFactory.getInstance().createCard(Const.SPADES, Const.QUEEN));
-		computer.setCards(CardFactory.getInstance().createCard(Const.DIAMONDS, Const.TEN));
-		player.setCards(CardFactory.getInstance().createCard(Const.DIAMONDS, Const.ACE));
-		computer.setCards(CardFactory.getInstance().createCard(Const.HEARTS, Const.SEVEN));
+		CardFactory cf = CardFactory.getInstance();
+		List<Card> allCards = new ArrayList<>();
 
-		CardHandler.drawCards(player, computer);
+		for (Colour colour : Colour.values()) {
+			for (Value value : Value.values()) {
+				allCards.add(cf.createCard(colour, value));
+			}
+		}
+		System.out.println();
+		// player.setCards(cf.createCard(Colour.DIAMONDS, Value.EIGHT));
+		// computer.setCards(cf.createCard(Colour.HEARTS, Value.KING));
+
+		// CardHandler.drawCards(player, computer);
 	}
 }

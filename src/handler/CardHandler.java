@@ -105,11 +105,11 @@ public class CardHandler {
 
 	public static String drawLabelLine(List<Card> pl1Cards, List<Card> pl2Cards, int[] cardCount) {
 		StringBuilder line = new StringBuilder();
-		String pl1LastCard = pl1Cards.get(cardCount[0] - 1).getLabel();
-		String pl2FirstCard = pl2Cards.get(0).getLabel();
+		String pl1LastCard = pl1Cards.get(cardCount[0] - 1).getValue(pl1Cards.get(cardCount[0] - 1)).getLabel();
+		String pl2FirstCard = pl2Cards.get(0).getValue(pl2Cards.get(0)).getLabel();
 
 		for (int i = 0; i < cardCount[0]; i++) {
-			String cardLabel = pl1Cards.get(i).getLabel();
+			String cardLabel = pl1Cards.get(i).getValue(pl1Cards.get(i)).getLabel();
 
 			line.append(Const.VLINE);
 			line.append(cardLabel);
@@ -142,10 +142,10 @@ public class CardHandler {
 		}
 
 		for (int i = 0; i < cardCount[1]; i++) {
-			for (int j = pl2Cards.get(i).getLabel().length() + 1; j < 4; j++) {
+			for (int j = pl2Cards.get(i).getValue(pl2Cards.get(i)).getLabel().length() + 1; j < 4; j++) {
 				line.append(Const.SPACE);
 			}
-			line.append(pl2Cards.get(i).getLabel());
+			line.append(pl2Cards.get(i).getValue(pl2Cards.get(i)).getLabel());
 			line.append(Const.VLINE);
 		}
 		return line.toString();
@@ -153,11 +153,11 @@ public class CardHandler {
 
 	public static String drawColourLine(List<Card> pl1Cards, List<Card> pl2Cards, int[] cardCount) {
 		StringBuilder line = new StringBuilder();
-		char pl1LastCard = pl1Cards.get(cardCount[0] - 1).getColour();
-		char pl2FirstCard = pl2Cards.get(0).getColour();
+		char pl1LastCard = pl1Cards.get(cardCount[0] - 1).getColour().getColour();
+		char pl2FirstCard = pl2Cards.get(0).getColour().getColour();
 
 		for (int i = 0; i < cardCount[0]; i++) {
-			char cardColour = pl1Cards.get(i).getColour();
+			char cardColour = pl1Cards.get(i).getColour().getColour();
 
 			line.append(Const.VLINE);
 			line.append(Const.SPACE);
@@ -186,7 +186,7 @@ public class CardHandler {
 
 		for (int i = 0; i < cardCount[1]; i++) {
 			line.append(Const.SPACE);
-			line.append(pl2Cards.get(i).getColour());
+			line.append(pl2Cards.get(i).getColour().getColour());
 			line.append(Const.SPACE);
 			line.append(Const.VLINE);
 		}
