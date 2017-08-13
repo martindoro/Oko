@@ -2,7 +2,9 @@ package app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import handler.CardHandler;
 import model.card.Card;
 import model.card.Colour;
 import model.card.Value;
@@ -20,10 +22,15 @@ public class Start {
 				allCards.add(cf.createCard(colour, value));
 			}
 		}
-		System.out.println();
-		// player.setCards(cf.createCard(Colour.DIAMONDS, Value.EIGHT));
-		// computer.setCards(cf.createCard(Colour.HEARTS, Value.KING));
+		for (int i = 0; i < 2; i++) {
+			Card playerCard = allCards.get(new Random().nextInt(allCards.size()));
+			player.setCards(playerCard);
+			allCards.remove(playerCard);
+			Card computerCard = allCards.get(new Random().nextInt(allCards.size()));
+			computer.setCards(computerCard);
+			allCards.remove(computerCard);
+		}
 
-		// CardHandler.drawCards(player, computer);
+		CardHandler.drawCards(player, computer);
 	}
 }

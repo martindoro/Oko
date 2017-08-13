@@ -7,6 +7,14 @@ import model.card.Card;
 
 public class Player {
 	private List<Card> cards = new ArrayList<Card>();
+	private int cardsValue;
+
+	public int getCardsValue() {
+		for (Card card : cards) {
+			cardsValue = cardsValue + card.getValue(card).value;
+		}
+		return cardsValue;
+	}
 
 	public List<Card> getCards() {
 		return cards;

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import app.Player;
+import app.Screen;
 import model.Const;
 import model.card.Card;
 
@@ -16,7 +17,7 @@ public class CardHandler {
 		int pl2CardCount = pl2.getCards().size();
 		int[] cardCount = { pl1CardCount, pl2CardCount };
 
-		System.out.println(drawScreenLabel());
+		System.out.println(Screen.drawScreenLabel(pl1, pl2));
 		System.out.println();
 		System.out.println(drawTopLine(cardCount));
 		System.out.println(drawLabelLine(pl1Cards, pl2Cards, cardCount));
@@ -226,20 +227,6 @@ public class CardHandler {
 			line.append(Const.SPACE);
 			line.append(Const.VLINE);
 		}
-
-		return line.toString();
-	}
-
-	public static String drawScreenLabel() {
-		String p1 = "PLAYER";
-		String p2 = "COMPUTER";
-		StringBuilder line = new StringBuilder();
-
-		line.append(p1);
-		for (int i = 0; i < 40 - p1.length(); i++) {
-			line.append(Const.SPACE);
-		}
-		line.append(p2);
 
 		return line.toString();
 	}
