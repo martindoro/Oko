@@ -12,8 +12,18 @@ import model.card.Value;
 public class Start {
 	public static void main(String[] args) {
 		System.out.println("Štart hry...");
-		Player player = new Player();
-		Player computer = new Player();
+		Player player = new Player("Player");
+		Player c1 = new Player("Stupid Computer");
+		Player c2 = new Player("Smart Computer");
+		Player c3 = new Player("Cheating Computer");
+		Player c4 = new Player("Excellent Computer");
+		List<Player> listOfPlayers = new ArrayList<>();
+		listOfPlayers.add(player);
+		listOfPlayers.add(c1);
+		listOfPlayers.add(c2);
+		listOfPlayers.add(c3);
+		listOfPlayers.add(c4);
+
 		CardFactory cf = CardFactory.getInstance();
 		List<Card> allCards = new ArrayList<>();
 
@@ -23,14 +33,13 @@ public class Start {
 			}
 		}
 		for (int i = 0; i < 2; i++) {
-			Card playerCard = allCards.get(new Random().nextInt(allCards.size()));
-			player.setCards(playerCard);
-			allCards.remove(playerCard);
-			Card computerCard = allCards.get(new Random().nextInt(allCards.size()));
-			computer.setCards(computerCard);
-			allCards.remove(computerCard);
+			for (Player p : listOfPlayers) {
+				Card playerCard = allCards.get(new Random().nextInt(allCards.size()));
+				p.setCards(playerCard);
+				allCards.remove(playerCard);
+			}
 		}
 
-		CardHandler.drawCards(player, computer);
+		CardHandler.drawCards(listOfPlayers);
 	}
 }

@@ -1,14 +1,9 @@
 package app;
 
-import java.util.List;
-
 import model.Const;
 
 public class Screen {
 	private static Screen instance;
-	private static Player player;
-	private static Player computer;
-	private List<StringBuilder> lines;
 
 	public static Screen getInstance() {
 		if (instance == null) {
@@ -17,11 +12,11 @@ public class Screen {
 		return instance;
 	}
 
-	public static String drawScreenLabel(Player player, Player computer) {
+	public static String drawScreenLabel(Player player) {
 		String p1 = "PLAYER";
-		String p2 = "COMPUTER";
+		String p2 = "COMPUTERS";
 		String p1Value = " (cards value is " + Integer.toString(player.getCardsValue()) + ")";
-		String p2Value = " (cards value is " + Integer.toString(computer.getCardsValue()) + ")";
+
 		StringBuilder line = new StringBuilder();
 
 		line.append(p1);
@@ -30,7 +25,6 @@ public class Screen {
 			line.append(Const.SPACE);
 		}
 		line.append(p2);
-		line.append(p2Value);
 
 		return line.toString();
 	}

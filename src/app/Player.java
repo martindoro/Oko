@@ -8,6 +8,19 @@ import model.card.Card;
 public class Player {
 	private List<Card> cards = new ArrayList<Card>();
 	private int cardsValue;
+	private String name;
+
+	public Player(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public int getCardsValue() {
 		for (Card card : cards) {

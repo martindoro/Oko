@@ -1,6 +1,5 @@
 package handler;
 
-import java.util.Collections;
 import java.util.List;
 
 import app.Player;
@@ -9,31 +8,31 @@ import model.Const;
 import model.card.Card;
 
 public class CardHandler {
-	public static void drawCards(Player pl1, Player pl2) {
-		List<Card> pl1Cards = pl1.getCards();
-		List<Card> pl2Cards = pl2.getCards();
-		Collections.reverse(pl2Cards);
+	public static void drawCards(List<Player> listOfPlayers) {
+		Player pl1 = listOfPlayers.get(0);
+		Player pl2 = listOfPlayers.get(1);
+		Player pl3 = listOfPlayers.get(2);
+		Player pl4 = listOfPlayers.get(3);
+		Player pl5 = listOfPlayers.get(4);
 		int pl1CardCount = pl1.getCards().size();
-		int pl2CardCount = pl2.getCards().size();
-		int[] cardCount = { pl1CardCount, pl2CardCount };
 
-		System.out.println(Screen.drawScreenLabel(pl1, pl2));
+		System.out.println(Screen.drawScreenLabel(pl1));
 		System.out.println();
-		System.out.println(drawTopLine(cardCount));
-		System.out.println(drawLabelLine(pl1Cards, pl2Cards, cardCount));
-		System.out.println(drawColourLine(pl1Cards, pl2Cards, cardCount));
+		System.out.println(drawTopLine(pl1CardCount));
+		System.out.println(drawLabelLine(pl1, pl2));
+		System.out.println(drawColourLine(pl1, pl3));
 		for (int i = 0; i < Const.CARD_SIZE_Y - 6; i++) {
-			System.out.println(drawEmptyLine(cardCount));
+			System.out.println(drawEmptyLine(pl1CardCount));
 		}
-		System.out.println(drawColourLine(pl1Cards, pl2Cards, cardCount));
-		System.out.println(drawLabelLine(pl1Cards, pl2Cards, cardCount));
-		System.out.println(drawBottomLine(cardCount));
+		System.out.println(drawColourLine(pl1, pl4));
+		System.out.println(drawLabelLine(pl1, pl5));
+		System.out.println(drawBottomLine(pl1CardCount));
 	}
 
-	public static String drawTopLine(int[] cardCount) {
+	public static String drawTopLine(int pl1CardCount) {
 		StringBuilder line = new StringBuilder();
 
-		for (int i = 0; i < cardCount[0]; i++) {
+		for (int i = 0; i < pl1CardCount; i++) {
 			line.append(Const.TLC);
 			line.append(Const.HLINE);
 			line.append(Const.HLINE);
@@ -44,33 +43,13 @@ public class CardHandler {
 			line.append(Const.HLINE);
 		}
 		line.append(Const.TRC);
-
-		for (int i = 0; i < 40 - ((cardCount[0] - 1) * 4 + Const.CARD_SIZE_X); i++) {
-			line.append(Const.SPACE);
-		}
-
-		line.append(Const.TLC);
-
-		for (int i = 0; i < Const.CARD_SIZE_X - 2; i++) {
-			line.append(Const.HLINE);
-		}
-
-		line.append(Const.TRC);
-
-		for (int i = 1; i < cardCount[1]; i++) {
-			line.append(Const.HLINE);
-			line.append(Const.HLINE);
-			line.append(Const.HLINE);
-			line.append(Const.TRC);
-		}
-
 		return line.toString();
 	}
 
-	public static String drawBottomLine(int[] cardCount) {
+	public static String drawBottomLine(int pl1CardCount) {
 		StringBuilder line = new StringBuilder();
 
-		for (int i = 0; i < cardCount[0]; i++) {
+		for (int i = 0; i < pl1CardCount; i++) {
 			line.append(Const.BLC);
 			line.append(Const.HLINE);
 			line.append(Const.HLINE);
@@ -81,35 +60,18 @@ public class CardHandler {
 			line.append(Const.HLINE);
 		}
 		line.append(Const.BRC);
-
-		for (int i = 0; i < 40 - ((cardCount[0] - 1) * 4 + Const.CARD_SIZE_X); i++) {
-			line.append(Const.SPACE);
-		}
-
-		line.append(Const.BLC);
-
-		for (int i = 0; i < Const.CARD_SIZE_X - 2; i++) {
-			line.append(Const.HLINE);
-		}
-
-		line.append(Const.BRC);
-
-		for (int i = 1; i < cardCount[1]; i++) {
-			line.append(Const.HLINE);
-			line.append(Const.HLINE);
-			line.append(Const.HLINE);
-			line.append(Const.BRC);
-		}
-
 		return line.toString();
 	}
 
-	public static String drawLabelLine(List<Card> pl1Cards, List<Card> pl2Cards, int[] cardCount) {
+	public static String drawLabelLine(Player pl1, Player pl2) {
+		List<Card> pl1Cards = pl1.getCards();
+		List<Card> pl2Cards = pl2.getCards();
+		int pl1CardCount = pl1Cards.size();
+		int pl2CardCount = pl2Cards.size();
 		StringBuilder line = new StringBuilder();
-		String pl1LastCard = pl1Cards.get(cardCount[0] - 1).getValue(pl1Cards.get(cardCount[0] - 1)).getLabel();
-		String pl2FirstCard = pl2Cards.get(0).getValue(pl2Cards.get(0)).getLabel();
+		String pl1LastCard = pl1Cards.get(pl1CardCount - 1).getValue(pl1Cards.get(pl1CardCount - 1)).getLabel();
 
-		for (int i = 0; i < cardCount[0]; i++) {
+		for (int i = 0; i < pl1CardCount; i++) {
 			String cardLabel = pl1Cards.get(i).getValue(pl1Cards.get(i)).getLabel();
 
 			line.append(Const.VLINE);
@@ -127,37 +89,31 @@ public class CardHandler {
 		line.append(pl1LastCard);
 		line.append(Const.VLINE);
 
-		for (int i = 0; i < 40 - ((cardCount[0] - 1) * 4 + Const.CARD_SIZE_X); i++) {
+		for (int i = 0; i < 40 - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
 			line.append(Const.SPACE);
 		}
 
-		line.append(Const.VLINE);
-		line.append(pl2FirstCard);
+		line.append(pl2.getName());
+		line.append(" (cards value " + Integer.toString(pl2.getCardsValue()) + ") ");
 
-		for (int i = pl2FirstCard.length(); i < 3; i++) {
-			line.append(Const.SPACE);
-		}
-
-		for (int j = 0; j < 2; j++) {
-			line.append(Const.SPACE);
-		}
-
-		for (int i = 0; i < cardCount[1]; i++) {
-			for (int j = pl2Cards.get(i).getValue(pl2Cards.get(i)).getLabel().length() + 1; j < 4; j++) {
-				line.append(Const.SPACE);
-			}
+		for (int i = 0; i < (pl2CardCount); i++) {
 			line.append(pl2Cards.get(i).getValue(pl2Cards.get(i)).getLabel());
-			line.append(Const.VLINE);
+			line.append(pl2Cards.get(i).getColour().getColour());
+			line.append(Const.SPACE);
 		}
+
 		return line.toString();
 	}
 
-	public static String drawColourLine(List<Card> pl1Cards, List<Card> pl2Cards, int[] cardCount) {
+	public static String drawColourLine(Player pl1, Player pl2) {
+		List<Card> pl1Cards = pl1.getCards();
+		List<Card> pl2Cards = pl2.getCards();
+		int pl1CardCount = pl1Cards.size();
+		int pl2CardCount = pl2Cards.size();
 		StringBuilder line = new StringBuilder();
-		char pl1LastCard = pl1Cards.get(cardCount[0] - 1).getColour().getColour();
-		char pl2FirstCard = pl2Cards.get(0).getColour().getColour();
+		char pl1LastCard = pl1Cards.get(pl1CardCount - 1).getColour().getColour();
 
-		for (int i = 0; i < cardCount[0]; i++) {
+		for (int i = 0; i < pl1CardCount; i++) {
 			char cardColour = pl1Cards.get(i).getColour().getColour();
 
 			line.append(Const.VLINE);
@@ -173,31 +129,26 @@ public class CardHandler {
 		line.append(Const.SPACE);
 		line.append(Const.VLINE);
 
-		for (int i = 0; i < 40 - ((cardCount[0] - 1) * 4 + Const.CARD_SIZE_X); i++) {
+		for (int i = 0; i < 40 - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
 			line.append(Const.SPACE);
 		}
 
-		line.append(Const.VLINE);
-		line.append(Const.SPACE);
-		line.append(pl2FirstCard);
+		line.append(pl2.getName());
+		line.append(" (cards value " + Integer.toString(pl2.getCardsValue()) + ") ");
 
-		for (int i = 0; i < Const.CARD_SIZE_X - 7; i++) {
-			line.append(Const.SPACE);
-		}
-
-		for (int i = 0; i < cardCount[1]; i++) {
-			line.append(Const.SPACE);
+		for (int i = 0; i < pl2CardCount; i++) {
+			line.append(pl2Cards.get(i).getValue(pl2Cards.get(i)).getValue());
 			line.append(pl2Cards.get(i).getColour().getColour());
 			line.append(Const.SPACE);
-			line.append(Const.VLINE);
 		}
+
 		return line.toString();
 	}
 
-	public static String drawEmptyLine(int[] cardCount) {
+	public static String drawEmptyLine(int cardCount) {
 		StringBuilder line = new StringBuilder();
 
-		for (int i = 0; i < cardCount[0]; i++) {
+		for (int i = 0; i < cardCount; i++) {
 			line.append(Const.VLINE);
 			line.append(Const.SPACE);
 			line.append(Const.SPACE);
@@ -208,26 +159,6 @@ public class CardHandler {
 			line.append(Const.SPACE);
 		}
 		line.append(Const.VLINE);
-
-		for (int i = 0; i < 40 - ((cardCount[0] - 1) * 4 + Const.CARD_SIZE_X); i++) {
-			line.append(Const.SPACE);
-		}
-
-		line.append(Const.VLINE);
-
-		for (int i = 0; i < Const.CARD_SIZE_X - 2; i++) {
-			line.append(Const.SPACE);
-		}
-
-		line.append(Const.VLINE);
-
-		for (int i = 1; i < cardCount[1]; i++) {
-			line.append(Const.SPACE);
-			line.append(Const.SPACE);
-			line.append(Const.SPACE);
-			line.append(Const.VLINE);
-		}
-
 		return line.toString();
 	}
 }
