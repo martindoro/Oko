@@ -89,14 +89,14 @@ public class CardHandler {
 		line.append(pl1LastCard);
 		line.append(Const.VLINE);
 
-		for (int i = 0; i < 40 - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
+		for (int i = 0; i < 35 - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
 			line.append(Const.SPACE);
 		}
 
 		line.append(pl2.getName());
-		line.append(" (cards value " + Integer.toString(pl2.getCardsValue()) + ") ");
+		line.append(" (" + Integer.toString(pl2.getCardsValue()) + " pts) ");
 
-		for (int i = 0; i < (pl2CardCount); i++) {
+		for (int i = 0; i < pl2CardCount; i++) {
 			line.append(pl2Cards.get(i).getValue(pl2Cards.get(i)).getLabel());
 			line.append(pl2Cards.get(i).getColour().getColour());
 			line.append(Const.SPACE);
@@ -129,15 +129,15 @@ public class CardHandler {
 		line.append(Const.SPACE);
 		line.append(Const.VLINE);
 
-		for (int i = 0; i < 40 - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
+		for (int i = 0; i < 35 - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
 			line.append(Const.SPACE);
 		}
 
 		line.append(pl2.getName());
-		line.append(" (cards value " + Integer.toString(pl2.getCardsValue()) + ") ");
+		line.append(" (" + Integer.toString(pl2.getCardsValue()) + " pts) ");
 
 		for (int i = 0; i < pl2CardCount; i++) {
-			line.append(pl2Cards.get(i).getValue(pl2Cards.get(i)).getValue());
+			line.append(pl2Cards.get(i).getValue(pl2Cards.get(i)).getLabel());
 			line.append(pl2Cards.get(i).getColour().getColour());
 			line.append(Const.SPACE);
 		}
