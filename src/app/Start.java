@@ -49,7 +49,9 @@ public class Start {
 		while (doesAnyoneWantCard(listOfPlayers)) {
 			for (Player p : listOfPlayers) {
 				if (Player.getDecision(p)) {
-					p.setCards(allCards.get(new Random().nextInt(allCards.size())));
+					Card card = allCards.get(new Random().nextInt(allCards.size()));
+					p.setCards(card);
+					allCards.remove(card);
 				}
 			}
 			if (listOfPlayers.get(0).isWantAnotherCard()) {
@@ -57,5 +59,6 @@ public class Start {
 			}
 		}
 		CardHandler.drawCards(listOfPlayers);
+		System.out.println("And the Winner is " + Screen.andTheWinnerIs(listOfPlayers).toUpperCase() + " !");
 	}
 }

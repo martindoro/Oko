@@ -16,10 +16,13 @@ public class Const {
 	public static final char BRC = 9563;
 	public static final char HLINE = 9552;
 	public static final char VLINE = 9474;
+	public static final char TOP_CONNECTION = 9572;
+	public static final char BOTTOM_CONNECTION = 9575;
 	public static final char CLUBS = 9827;
 	public static final char SPADES = 9824;
 	public static final char DIAMONDS = 9830;
 	public static final char HEARTS = 9829;
 	public static final int CARD_SIZE_X = 10;
 	public static final int CARD_SIZE_Y = 8;
+	public static final int FREE_SPACE = 40;
 }

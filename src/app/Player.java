@@ -53,12 +53,8 @@ public class Player {
 	private boolean decide(int cardsValue) {
 		switch (cardsValue) {
 		case 16:
-			return true;
 		case 17:
-			return true;
 		case 18:
-			return true;
-		case 19:
 			return true;
 		default:
 			return false;
@@ -74,7 +70,7 @@ public class Player {
 		}
 	}
 
-	public static boolean getDecision(Player player) throws BadUserInputException {
+	public static boolean getDecision(Player player) {
 		boolean finalDecision = false;
 
 		if (player.getName().equals("Player")) {

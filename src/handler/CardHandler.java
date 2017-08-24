@@ -33,7 +33,11 @@ public class CardHandler {
 		StringBuilder line = new StringBuilder();
 
 		for (int i = 0; i < pl1CardCount; i++) {
-			line.append(Const.TLC);
+			if (i == 0) {
+				line.append(Const.TLC);
+			} else {
+				line.append(Const.TOP_CONNECTION);
+			}
 			line.append(Const.HLINE);
 			line.append(Const.HLINE);
 			line.append(Const.HLINE);
@@ -50,7 +54,11 @@ public class CardHandler {
 		StringBuilder line = new StringBuilder();
 
 		for (int i = 0; i < pl1CardCount; i++) {
-			line.append(Const.BLC);
+			if (i == 0) {
+				line.append(Const.BLC);
+			} else {
+				line.append(Const.BOTTOM_CONNECTION);
+			}
 			line.append(Const.HLINE);
 			line.append(Const.HLINE);
 			line.append(Const.HLINE);
@@ -89,7 +97,7 @@ public class CardHandler {
 		line.append(pl1LastCard);
 		line.append(Const.VLINE);
 
-		for (int i = 0; i < 35 - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
+		for (int i = 0; i < Const.FREE_SPACE - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
 			line.append(Const.SPACE);
 		}
 
@@ -129,7 +137,7 @@ public class CardHandler {
 		line.append(Const.SPACE);
 		line.append(Const.VLINE);
 
-		for (int i = 0; i < 35 - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
+		for (int i = 0; i < Const.FREE_SPACE - ((pl1CardCount - 1) * 4 + Const.CARD_SIZE_X); i++) {
 			line.append(Const.SPACE);
 		}
 
