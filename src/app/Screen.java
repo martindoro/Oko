@@ -34,15 +34,17 @@ public class Screen {
 
 	public static void drawPlayerInput() {
 		System.out.println();
-		System.out.println("***DO YUO WANT ANOTHER CARD ?***");
+		System.out.println("***DO YOU WANT ANOTHER CARD ?***");
 		System.out.println("*     y = yes       n = no     *");
 		System.out.println("********************************");
 	}
 
 	public static String andTheWinnerIs(List<Player> listOfPlayers) {
 		List<Player> winnersList = new ArrayList<Player>();
-		listOfPlayers.sort((p1, p2) -> (new Integer(p1.getCardsValue())).compareTo(p2.getCardsValue()));
-		for (Player p : listOfPlayers) {
+		List<Player> finalStand = new ArrayList<Player>();
+		finalStand.addAll(listOfPlayers);
+		finalStand.sort((p1, p2) -> (new Integer(p1.getCardsValue())).compareTo(p2.getCardsValue()));
+		for (Player p : finalStand) {
 			switch (p.getCardsValue()) {
 			case 16:
 			case 17:
@@ -60,6 +62,8 @@ public class Screen {
 			}
 		}
 		if (winnersList.size() != 0) {
+			winnersList.get(winnersList.size() - 1)
+					.setGameWins((winnersList.get(winnersList.size() - 1).getGameWins()) + 1);
 			return winnersList.get(winnersList.size() - 1).getName().toString();
 		} else {
 			return "Nobody! - all players burned";

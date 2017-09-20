@@ -11,7 +11,16 @@ public class Player {
 	private List<Card> cards = new ArrayList<Card>();
 	private int cardsValue;
 	private String name;
+	private int gameWins;
 	boolean wantAnotherCard = true;
+
+	public int getGameWins() {
+		return gameWins;
+	}
+
+	public void setGameWins(int gameWins) {
+		this.gameWins = gameWins;
+	}
 
 	public boolean isWantAnotherCard() {
 		return wantAnotherCard;
@@ -21,8 +30,9 @@ public class Player {
 		this.wantAnotherCard = wantAnotherCard;
 	}
 
-	public Player(String name) {
+	public Player(String name, int gameWins) {
 		this.name = name;
+		this.gameWins = gameWins;
 	}
 
 	public String getName() {
@@ -48,6 +58,35 @@ public class Player {
 
 	public void setCards(Card card) {
 		cards.add(card);
+	}
+
+	public void removeCards() {
+		cards.clear();
+	}
+
+	public static boolean wantContinue() {
+		String decision;
+		boolean toContinue = true;
+		boolean decisionMade = true;
+		while (decisionMade) {
+			try {
+				decision = Player.userInput();
+			} catch (BadUserInputException e) {
+				continue;
+			}
+			switch (decision) {
+			case "y":
+				decisionMade = false;
+				toContinue = true;
+				break;
+			case "n":
+				decisionMade = false;
+				toContinue = false;
+				break;
+			}
+		}
+		return toContinue;
+
 	}
 
 	private boolean decide(int cardsValue) {
@@ -91,7 +130,6 @@ public class Player {
 						break;
 					case "n":
 						player.setWantAnotherCard(false);
-						Player.sc.close();
 						decisionMade = false;
 						finalDecision = false;
 						break;
